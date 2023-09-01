@@ -1,0 +1,11 @@
+table{
+    width: 100%;
+    height: 100px;
+}
+
+td > span{
+    display: block;
+}
+td > img, td > span{
+    width: 30px;
+}
