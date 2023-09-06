@@ -5,7 +5,7 @@ import RoadContent from "./RoadContent";
 function Road_404(){
     const [road, setRoad] = useState(RoadContent.content());
     setTimeout(args => {
-        RoadContent.ShiftRoad()
+        RoadContent.MoveRoad()
         setRoad(RoadContent.content())
     }, 1000)
     return(
