@@ -1,17 +1,20 @@
 class RoadContent {
-    constructor() {
-        this.array = []
-        this.array[0] = 1;
+    #size
+    #array
+    constructor(size) {
+        this.#size = size
+        this.#array = []
+        this.#fill(1)
     }
     #fill(levelNumber){
-        for (let i = 1;i<20;i++){
-            if (i === 1){
-                this.array[i] = Math.floor(Math.random() * 2 + 2)
+        for (let i = 0;i<this.#size-1;i++){
+            if (i === 0){
+                this.#array.push(Math.floor(Math.random() * 2 + 2))
             }
             else if(this.#IsNull(levelNumber,i)) {
-                this.array[i] = Math.floor(Math.random() * 2 + 2)
+                this.#array.push(Math.floor(Math.random() * 2 + 2))
             }else {
-                this.array[i] = 0;
+                this.#array.push(0);
             }
         }
     }
@@ -19,14 +22,18 @@ class RoadContent {
     #IsNull(levelNumber,index){
         let isNull = true
         for (let i=1;i<=levelNumber;i++){
-            isNull = this.array[index - i] === 0;
+            isNull = this.#array[index - i] === 0;
         }
         return isNull
     }
+    ShiftRoad(){
+        this.#array.push(this.#array.shift())
+    }
 
-    content(levelNumber)  {
-        this.#fill(levelNumber)
-        return this.array
+    content()  {
+        let road = this.#array.slice(0, this.#size)
+        road.unshift(1)
+        return road
     }
 }
-export default new RoadContent()
+export default new RoadContent(20)
