@@ -3,23 +3,24 @@ import PlayerDragon from "./PlayerDragon";
 import Tree from "./Tree";
 import NullCell from "./NullCell";
 function Cell({roadConten}){
-    let  result =[<PlayerDragon key = "PlayerDragon_0"></PlayerDragon>]
+    let firstLine =[<NullCell key = "NullCell_1_0"></NullCell>]
+    let secondLine=[<PlayerDragon key = "PlayerDragon_2_0"></PlayerDragon>]
+    let thirdLine =[<NullCell key = "NullCell_3_0"></NullCell>]
     roadConten.forEach((elementRoad, index) =>{
-        switch (elementRoad){
-            case 1: {
-                result.push(<Bird key = {index} ></Bird>)
-                break
-            }
-            case 2:{
-                result.push(<Tree key = {index}></Tree>)
-                break
-            }
-            default:{
-                result.push(<NullCell key = {index}></NullCell>)
-                break
-            }
-
-        }})
-    return  result
+        firstLine.push(elementRoad ===1
+            ?<Bird key = {index} ></Bird>
+            :<NullCell key = {index}></NullCell> )
+        secondLine.push(<NullCell key = {index}></NullCell>)
+        thirdLine.push(elementRoad ===2
+            ?<Tree key = {index}></Tree>
+            :<NullCell key = {index}></NullCell> )
+    })
+    return  (
+        <tbody>
+            <tr>{firstLine}</tr>
+            <tr>{secondLine}</tr>
+            <tr>{thirdLine}</tr>
+        </tbody>
+    )
 }
 export default Cell

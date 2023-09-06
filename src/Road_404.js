@@ -10,11 +10,7 @@ function Road_404(){
     }, 1000)
     return(
         <table>
-            <tbody>
-            <tr>
                 <Cell roadConten={road}></Cell>
-            </tr>
-            </tbody>
         </table>
     )
 }
