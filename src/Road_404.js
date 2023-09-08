@@ -1,6 +1,6 @@
 import {useState} from "react"
 import  "./Styles/Road_404.css"
-import Cell from "./Cell";
+import Table from "./Table";
 import RoadContent from "./RoadContent";
 function Road_404(){
     const [road, setRoad] = useState(RoadContent.content());
@@ -8,9 +8,13 @@ function Road_404(){
         RoadContent.MoveRoad()
         setRoad(RoadContent.content())
     }, 1000)
+
+    function GetTdSize(getTdSize){
+        console.log("size",getTdSize())
+    }
     return(
         <table>
-                <Cell roadConten={road}></Cell>
+            <Table roadConten={RoadContent.content()} GetTdSizeAction={GetTdSize} imeOut={100} ></Table>
         </table>
     )
 }
