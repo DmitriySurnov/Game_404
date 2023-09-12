@@ -1,17 +1,46 @@
 import Cell from "./Cell";
+import {useEffect, useState} from "react";
+import MoveRoad from "./MoveRoad";
 
 
-function Row({rowRoadConten, GetTdSizeAction, timeOut}){
+function Row({rowRoadConten, GetTdAction, shiftFinished, trRef}){
+    const [rowConten, setRowConten] = useState(rowRoadConten);
     let result =[]
 
-    rowRoadConten.forEach((elementRow,index) =>{
+    rowConten.forEach((elementRow,index) =>{
         if (index === 0){
-            result.push(<Cell key={index} elementCell={elementRow} GetTdSizeAction={GetTdSizeAction} timeOut={timeOut}></Cell>)
+            result.push(
+                <Cell
+                    key={index}
+                    elementCell={elementRow}
+                    GetTdAction={GetTdAction}>
+                </Cell>)
         }
         else {
-            result.push(<Cell key={index} elementCell={elementRow}></Cell>)
+            result.push(
+                <Cell
+                    key={index}
+                    elementCell={elementRow}>
+                </Cell>)
         }
     })
+
+    useEffect(() => {
+        return () => {
+            trRef.current.style.right = "0px";
+        }
+    })
+
+
+    if (shiftFinished !== undefined){
+        const interval = setInterval(() => {
+            if (shiftFinished.current){
+                clearInterval(interval);
+                shiftFinished.current = false
+                setRowConten(MoveRoad(rowConten))
+            }
+        }, 20);
+    }
 
     return result
 }

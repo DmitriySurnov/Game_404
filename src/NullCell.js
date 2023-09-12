@@ -1,4 +1,4 @@
-import {useRef} from "react";
+import {useRef, useEffect} from "react";
 
 function NullCell({getTdSizeAction, timeOut}){
     const td = useRef(null)
@@ -7,10 +7,12 @@ function NullCell({getTdSizeAction, timeOut}){
         return td.current == null ? null: td.current.offsetWidth
     }
 
-    if (getTdSizeAction !== undefined){
-        setTimeout(() => getTdSizeAction(GetTdSizeAction),timeOut)
-        return (<td ref={td}><span></span></td>)
-    }
-    return (<td><span></span></td>)
+    useEffect(() => {
+        if (getTdSizeAction !== undefined){
+            getTdSizeAction(GetTdSizeAction);
+        }
+    })
+
+    return (<td ref={td}><span></span></td>)
 }
 export default NullCell

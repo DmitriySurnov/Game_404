@@ -7,21 +7,19 @@ class RoadContent {
         this.#fill(1)
     }
     #fill(levelNumber){
-        for (let i = 0;i<this.#size-1;i++){
-            if (i === 0){
-                this.#array.push(Math.floor(Math.random() * 2 + 1))
-            }
-            else if(this.#IsNull(levelNumber,i)) {
-                this.#array.push(Math.floor(Math.random() * 2 + 1))
-            }else {
-                this.#array.push(0);
-            }
+        for (let i = 0;i<this.#size;i++){
+            this.#array.push(this.#addElement(levelNumber,i))
         }
     }
-    /*  0 - пустая клетка
-        1 - птица
-        2 - дерево
-*/
+
+    #addElement(levelNumber, index){
+        if (index === 0 || this.#IsNull(levelNumber,index)){
+            return Math.floor(Math.random() * 2 + 1)
+        }
+        else{
+            return 0
+        }
+    }
 
     #IsNull(levelNumber,index){
         let isNull = true
@@ -30,12 +28,9 @@ class RoadContent {
         }
         return isNull
     }
-    MoveRoad(){
-        this.#array.push(this.#array.shift())
-    }
 
     content()  {
         return this.#array.slice(0, this.#size)
     }
 }
-export default new RoadContent(20)
+export default new RoadContent(30)
