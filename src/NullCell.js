@@ -1,6 +1,6 @@
 import {useRef, useEffect} from "react";
 
-function NullCell({getTdSizeAction, timeOut}){
+function NullCell({getTdSizeAction}){
     const td = useRef(null)
 
     function GetTdSizeAction(){

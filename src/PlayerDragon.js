@@ -1,5 +1,6 @@
-import {useState} from "react"
-function PlayerDragon(){
+import {useEffect, useRef, useState} from "react"
+import  "./Styles/Dragon.css"
+function PlayerDragon({getTdAction}){
     const animation = [
         "Image/Game/dragon.png",
         "Image/Game/dragon1.png",
@@ -10,15 +11,27 @@ function PlayerDragon(){
 
     setTimeout(args => {
         let animationIndex = currentSourceImage + 1;
-        if (animationIndex == animation.length){
+        if (animationIndex === animation.length){
             animationIndex = 0;
         }
         setCurrentSourceImage(animationIndex)
         setUrl(animation[currentSourceImage])
     }, 125)
 
+    const td = useRef(null)
+
+    function GetImgAction(){
+        return td.current == null ? null: td
+    }
+
+    useEffect(() => {
+        if (getTdAction !== undefined){
+            getTdAction(GetImgAction);
+        }
+    })
+
     return (
-        <td>
+        <td ref={td} className="Dragon">
             <img src={url}/>
         </td>
     )

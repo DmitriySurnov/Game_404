@@ -6,7 +6,7 @@ import setRightAction from "./SetRightAction";
 import RoadContent from "./RoadContent";
 
 
-function Table(){
+function Table({GetTdRefAction}){
     let firstRow =[0]
     let secondRow=[3]
     let thirdRow =[0]
@@ -55,7 +55,7 @@ function Table(){
             </Row>
         </tr>
         <tr>
-            <Row rowRoadConten={secondRow}></Row>
+            <Row rowRoadConten={secondRow} GetTdAction={GetTdRefAction}></Row>
         </tr>
         <tr ref={trBottom}>
             <Row
